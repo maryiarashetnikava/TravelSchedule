@@ -7,26 +7,26 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		0D2135B12FF28A7D004B822E /* Расписание путешествий.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Расписание путешествий.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0D2135B12FF28A7D004B822E /* Travel Schedule.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Travel Schedule.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		0D2135C32FF28A7E004B822E /* Exceptions for "Расписание путешествий" folder in "Расписание путешествий" target */ = {
+		0D2135C32FF28A7E004B822E /* Exceptions for "Travel Schedule" folder in "Travel Schedule" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 0D2135B02FF28A7D004B822E /* Расписание путешествий */;
+			target = 0D2135B02FF28A7D004B822E /* Travel Schedule */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		0D2135B32FF28A7D004B822E /* Расписание путешествий */ = {
+		0D2135B32FF28A7D004B822E /* Travel Schedule */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				0D2135C32FF28A7E004B822E /* Exceptions for "Расписание путешествий" folder in "Расписание путешествий" target */,
+				0D2135C32FF28A7E004B822E /* Exceptions for "Travel Schedule" folder in "Travel Schedule" target */,
 			);
-			path = "Расписание путешествий";
+			path = "Travel Schedule";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -45,7 +45,7 @@
 		0D2135A82FF28A7D004B822E = {
 			isa = PBXGroup;
 			children = (
-				0D2135B32FF28A7D004B822E /* Расписание путешествий */,
+				0D2135B32FF28A7D004B822E /* Travel Schedule */,
 				0D2135B22FF28A7D004B822E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,7 +53,7 @@
 		0D2135B22FF28A7D004B822E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0D2135B12FF28A7D004B822E /* Расписание путешествий.app */,
+				0D2135B12FF28A7D004B822E /* Travel Schedule.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,9 +61,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0D2135B02FF28A7D004B822E /* Расписание путешествий */ = {
+		0D2135B02FF28A7D004B822E /* Travel Schedule */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0D2135C42FF28A7E004B822E /* Build configuration list for PBXNativeTarget "Расписание путешествий" */;
+			buildConfigurationList = 0D2135C42FF28A7E004B822E /* Build configuration list for PBXNativeTarget "Travel Schedule" */;
 			buildPhases = (
 				0D2135AD2FF28A7D004B822E /* Sources */,
 				0D2135AE2FF28A7D004B822E /* Frameworks */,
@@ -74,13 +74,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				0D2135B32FF28A7D004B822E /* Расписание путешествий */,
+				0D2135B32FF28A7D004B822E /* Travel Schedule */,
 			);
-			name = "Расписание путешествий";
+			name = "Travel Schedule";
 			packageProductDependencies = (
 			);
 			productName = "Расписание путешествий";
-			productReference = 0D2135B12FF28A7D004B822E /* Расписание путешествий.app */;
+			productReference = 0D2135B12FF28A7D004B822E /* Travel Schedule.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -98,7 +98,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0D2135AC2FF28A7D004B822E /* Build configuration list for PBXProject "Расписание путешествий" */;
+			buildConfigurationList = 0D2135AC2FF28A7D004B822E /* Build configuration list for PBXProject "Travel Schedule" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -112,7 +112,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0D2135B02FF28A7D004B822E /* Расписание путешествий */,
+				0D2135B02FF28A7D004B822E /* Travel Schedule */,
 			);
 		};
 /* End PBXProject section */
@@ -151,8 +151,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -161,12 +162,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.yandex.practicum.mareshetnikova.-----------------------";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -183,8 +187,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -193,12 +198,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.yandex.practicum.mareshetnikova.-----------------------";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -326,7 +334,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0D2135AC2FF28A7D004B822E /* Build configuration list for PBXProject "Расписание путешествий" */ = {
+		0D2135AC2FF28A7D004B822E /* Build configuration list for PBXProject "Travel Schedule" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0D2135C72FF28A7E004B822E /* Debug */,
@@ -335,7 +343,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0D2135C42FF28A7E004B822E /* Build configuration list for PBXNativeTarget "Расписание путешествий" */ = {
+		0D2135C42FF28A7E004B822E /* Build configuration list for PBXNativeTarget "Travel Schedule" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0D2135C52FF28A7E004B822E /* Debug */,
