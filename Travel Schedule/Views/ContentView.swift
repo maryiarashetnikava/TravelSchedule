@@ -3,23 +3,7 @@ import OpenAPIURLSession
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-        .onAppear {
-            testFetchStations()
-            testFetchCopyright()
-            testFetchSearch()
-            testFetchSchedule()
-            testFetchThread()
-            testFetchNearestSettlement()
-            testFetchCarrier()
-            testFetchStationsList()
-        }
+        MainTabView()
     }
 }
 
