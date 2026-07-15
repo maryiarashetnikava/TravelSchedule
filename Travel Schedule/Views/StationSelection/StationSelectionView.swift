@@ -20,7 +20,7 @@ struct StationSelectionView: View {
             }
             .padding(.horizontal, 16)
             .frame(height: 36)
-            .background(.ypLightGray)
+            .background(.ypSearchBackground)
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .padding(.horizontal, 16)
 

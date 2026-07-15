@@ -3,10 +3,12 @@ import SwiftUI
 struct MainTabView: View {
     var body: some View {
         TabView {
-            MainView()
-                .tabItem {
-                    Image(systemName: "arrow.up.message.fill")
-                }
+            NavigationStack {
+                MainView()
+            }
+            .tabItem {
+                Image(systemName: "arrow.up.message.fill")
+            }
 
             SettingsView()
                 .tabItem {

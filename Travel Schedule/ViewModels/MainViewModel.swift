@@ -4,6 +4,7 @@ import Observation
 final class MainViewModel {
     var departure = ""
     var destination = ""
+    var errorState: ErrorState? 
     
     var isSearchButtonVisible: Bool {
         !departure.isEmpty && !destination.isEmpty

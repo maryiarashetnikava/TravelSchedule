@@ -18,7 +18,7 @@ struct CitySelectionView: View {
                 }
                 .padding(.horizontal, 16)
                 .frame(height: 36)
-                .background(.ypLightGray)
+                .background(.ypSearchBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
                 .padding(.horizontal, 16)
                 
@@ -43,9 +43,9 @@ struct CitySelectionView: View {
                                     HStack {
                                         Text(city)
                                             .foregroundStyle(.ypBlack)
-
+                                        
                                         Spacer()
-
+                                        
                                         Image(systemName: "chevron.right")
                                             .foregroundStyle(.ypBlack)
                                     }
