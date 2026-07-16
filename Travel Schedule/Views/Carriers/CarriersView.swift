@@ -134,6 +134,7 @@ struct CarriersView: View {
             }
         }
         .toolbar(.hidden, for: .tabBar)
+        .background(.ypBackground)
     }
 }
 

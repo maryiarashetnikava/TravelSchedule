@@ -2,7 +2,7 @@ import Observation
 
 @Observable
 final class CarriersViewModel {
-    let carriers = [
+    private let carriers = [
         CarrierOption(
             carrierName: "РЖД",
             logoName: "rzdLogo",
@@ -63,29 +63,31 @@ final class CarriersViewModel {
             return carriers
         }
 
-        return carriers.filter { carrier in
-            let matchesTime: Bool
+        return carriers.filter(matchesFilters)
+    }
+    
+    private func matchesFilters(_ carrier: CarrierOption) -> Bool {
+        let matchesTime: Bool
 
-            if selectedTimes.isEmpty {
-                matchesTime = true
-            } else if let departureHour = carrier.departureHour {
-                matchesTime = selectedTimes.contains { option in
-                    option.contains(hour: departureHour)
-                }
-            } else {
-                matchesTime = false
+        if selectedTimes.isEmpty {
+            matchesTime = true
+        } else if let departureHour = carrier.departureHour {
+            matchesTime = selectedTimes.contains { option in
+                option.contains(hour: departureHour)
             }
-
-            let matchesTransfers: Bool
-
-            if let transfersAllowed {
-                matchesTransfers = transfersAllowed || !carrier.hasTransfer
-            } else {
-                matchesTransfers = true
-            }
-
-            return matchesTime && matchesTransfers
+        } else {
+            matchesTime = false
         }
+
+        let matchesTransfers: Bool
+
+        if let transfersAllowed {
+            matchesTransfers = transfersAllowed || !carrier.hasTransfer
+        } else {
+            matchesTransfers = true
+        }
+
+        return matchesTime && matchesTransfers
     }
     
     func toggleTime(_ option: DepartureTimeOption) {

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CarrierInfoView: View {
     @Environment(\.dismiss) private var dismiss
-
+    
     var body: some View {
         Text("Карточка перевозчика")
             .font(.system(size: 24, weight: .bold))

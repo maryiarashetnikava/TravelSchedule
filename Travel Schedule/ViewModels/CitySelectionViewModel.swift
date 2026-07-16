@@ -5,7 +5,7 @@ import Foundation
 final class CitySelectionViewModel {
     var searchText = ""
 
-    let cities = [
+    private let cities = [
         "Москва",
         "Санкт Петербург",
         "Сочи",

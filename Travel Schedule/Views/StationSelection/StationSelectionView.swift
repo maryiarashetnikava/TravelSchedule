@@ -58,6 +58,7 @@ struct StationSelectionView: View {
         }
         .navigationTitle("Выбор станции")
         .navigationBarTitleDisplayMode(.inline)
+        .background(.ypBackground)
     }
 }
 

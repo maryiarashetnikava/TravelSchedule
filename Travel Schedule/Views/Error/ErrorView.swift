@@ -19,6 +19,7 @@ struct ErrorView: View {
             Spacer()
         }
         .frame(maxWidth: .infinity)
+        .background(.ypBackground)
     }
 }
 

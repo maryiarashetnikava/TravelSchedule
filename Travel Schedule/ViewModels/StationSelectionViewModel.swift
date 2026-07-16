@@ -5,7 +5,7 @@ import Foundation
 final class StationSelectionViewModel {
     var searchText = ""
 
-    let stations = [
+    private let stations = [
         "Киевский вокзал",
         "Курский вокзал",
         "Ярославский вокзал",

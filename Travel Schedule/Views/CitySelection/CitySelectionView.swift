@@ -69,6 +69,7 @@ struct CitySelectionView: View {
                     }
                 }
             }
+            .background(.ypBackground)
         }
     }
 }

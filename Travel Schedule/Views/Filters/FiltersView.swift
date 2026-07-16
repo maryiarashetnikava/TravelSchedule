@@ -19,7 +19,7 @@ struct FiltersView: View {
                     viewModel.toggleTime(option)
                 } label: {
                     HStack {
-                        Text(option.rawValue)
+                        Text(option.title)
                             .font(.system(size: 17))
                             .foregroundStyle(.ypBlack)
 
@@ -118,6 +118,7 @@ struct FiltersView: View {
                 }
             }
         }
+        .background(.ypBackground)
     }
 }
 

@@ -87,7 +87,7 @@ struct MainView: View {
                 )
             }
         }
-        
+        .background(.ypBackground)
     }
 
 }
