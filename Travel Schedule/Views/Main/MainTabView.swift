@@ -10,10 +10,12 @@ struct MainTabView: View {
                 Image(systemName: "arrow.up.message.fill")
             }
 
-            SettingsView()
-                .tabItem {
-                    Image(systemName: "gearshape.fill")
-                }
+            NavigationStack {
+                SettingsView()
+            }
+            .tabItem {
+                Image(systemName: "gearshape.fill")
+            }
         }
         .tint(.ypBlack)
     }

@@ -5,6 +5,8 @@ struct UserAgreementView: View {
 
     var body: some View {
         UserAgreementWebView()
+            .background(.ypBackground)
+            .ignoresSafeArea(edges: .bottom)
             .navigationTitle("Пользовательское соглашение")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(true)

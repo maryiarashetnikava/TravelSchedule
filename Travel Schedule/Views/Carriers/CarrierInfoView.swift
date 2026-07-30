@@ -3,14 +3,16 @@ import SwiftUI
 struct CarrierInfoView: View {
     @Environment(\.dismiss) private var dismiss
 
-    private let carrierName = "ОАО «РЖД»"
-    private let email = "info@rzd.ru"
-    private let phone = "+7 (900) 000-00-00"
+    private enum Constants {
+        static let carrierName = "ОАО «РЖД»"
+        static let email = "info@rzd.ru"
+        static let phone = "+7 (900) 000-00-00"
+    }
 
     var body: some View {
         VStack(alignment: .center) {
 
-            Image("rzd")
+            Image("rzdLargeLogo")
                 .resizable()
                 .scaledToFit()
                 .clipShape(RoundedRectangle(cornerRadius: 24))
@@ -18,7 +20,7 @@ struct CarrierInfoView: View {
 
             VStack(alignment: .leading, spacing: 24) {
 
-                Text(carrierName)
+                Text(Constants.carrierName)
                     .font(.system(size: 24, weight: .bold))
 
                 VStack(alignment: .leading, spacing: 4) {
@@ -26,7 +28,7 @@ struct CarrierInfoView: View {
                         .font(.system(size: 17, weight: .regular))
                         .foregroundStyle(.ypBlack)
 
-                    Text(email)
+                    Text(Constants.email)
                         .font(.system(size: 12, weight: .regular))
                         .foregroundStyle(.ypBlue)
                 }
@@ -36,7 +38,7 @@ struct CarrierInfoView: View {
                         .font(.system(size: 17, weight: .regular))
                         .foregroundStyle(.ypBlack)
 
-                    Text(phone)
+                    Text(Constants.phone)
                         .font(.system(size: 12, weight: .regular))
                         .foregroundStyle(.ypBlue)
                 }

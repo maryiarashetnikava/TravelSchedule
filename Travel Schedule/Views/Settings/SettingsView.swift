@@ -2,6 +2,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @AppStorage("isDarkTheme") private var isDarkTheme = false
+    
+    @State private var isUserAgreementPresented = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -14,9 +16,8 @@ struct SettingsView: View {
             .tint(.ypBlue)
             .padding(.vertical, 19)
 
-
-            NavigationLink {
-                UserAgreementView()
+            Button {
+                isUserAgreementPresented = true
             } label: {
                 HStack {
                     Text("Пользовательское соглашение")
@@ -50,6 +51,11 @@ struct SettingsView: View {
         .padding(.horizontal, 16)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.ypBackground)
+        .fullScreenCover(isPresented: $isUserAgreementPresented) {
+            NavigationStack {
+                UserAgreementView()
+            }
+        }
     }
 }
 

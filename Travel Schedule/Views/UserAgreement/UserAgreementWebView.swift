@@ -17,7 +17,7 @@ struct UserAgreementWebView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: WKWebView, context: Context) {
-
+        // No updates needed.
     }
 }
 

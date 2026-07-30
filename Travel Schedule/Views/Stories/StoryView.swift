@@ -118,7 +118,7 @@ struct StoryView: View {
     }
     
     private func timerTick() {
-        var nextPageProgress = pageProgress + configuration.progressPerTick
+        let nextPageProgress = pageProgress + configuration.progressPerTick
 
         if nextPageProgress >= 1 {
             nextPage()
