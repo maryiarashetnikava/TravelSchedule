@@ -1,6 +1,6 @@
 import Foundation
 
-struct StoryPage: Identifiable {
+struct StoryPage: Identifiable, Sendable {
     let id = UUID()
     let imageName: String
 }

@@ -1,4 +1,4 @@
-enum DepartureTimeOption: CaseIterable, Identifiable {
+enum DepartureTimeOption: CaseIterable, Identifiable, Sendable {
     case morning
     case day
     case evening

@@ -1,5 +1,5 @@
 
-enum RouteSelectionType: Identifiable {
+enum RouteSelectionType: Identifiable, Sendable {
     case departure
     case destination
 

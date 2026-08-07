@@ -3,24 +3,40 @@ import SwiftUI
 struct CarrierInfoView: View {
     @Environment(\.dismiss) private var dismiss
 
-    private enum Constants {
-        static let carrierName = "ОАО «РЖД»"
-        static let email = "info@rzd.ru"
-        static let phone = "+7 (900) 000-00-00"
-    }
+    @State private var viewModel = CarrierInfoViewModel()
 
+    let carrierCode: String
+    
     var body: some View {
         VStack(alignment: .center) {
 
-            Image("rzdLargeLogo")
-                .resizable()
-                .scaledToFit()
+            if let logoURL = viewModel.carrier?.logo,
+               let url = URL(string: logoURL) {
+
+                AsyncImage(url: url) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    ProgressView()
+                }
                 .clipShape(RoundedRectangle(cornerRadius: 24))
                 .padding(.top, 16)
 
+            } else {
+                RoundedRectangle(cornerRadius: 24)
+                    .fill(.ypLightGray)
+                    .frame(height: 104)
+                    .overlay {
+                        Image(systemName: "photo")
+                            .foregroundStyle(.ypGray)
+                    }
+                    .padding(.top, 16)
+            }
+
             VStack(alignment: .leading, spacing: 24) {
 
-                Text(Constants.carrierName)
+                Text(viewModel.carrier?.title ?? "Неизвестный перевозчик")
                     .font(.system(size: 24, weight: .bold))
 
                 VStack(alignment: .leading, spacing: 4) {
@@ -28,7 +44,7 @@ struct CarrierInfoView: View {
                         .font(.system(size: 17, weight: .regular))
                         .foregroundStyle(.ypBlack)
 
-                    Text(Constants.email)
+                    Text(viewModel.email)
                         .font(.system(size: 12, weight: .regular))
                         .foregroundStyle(.ypBlue)
                 }
@@ -38,7 +54,7 @@ struct CarrierInfoView: View {
                         .font(.system(size: 17, weight: .regular))
                         .foregroundStyle(.ypBlack)
 
-                    Text(Constants.phone)
+                    Text(viewModel.phone)
                         .font(.system(size: 12, weight: .regular))
                         .foregroundStyle(.ypBlue)
                 }
@@ -63,12 +79,15 @@ struct CarrierInfoView: View {
                 }
             }
         }
+        .task {
+            await viewModel.loadCarrier(code: carrierCode)
+        }
     }
 }
 
 
 #Preview {
     NavigationStack {
-        CarrierInfoView()
+        CarrierInfoView(carrierCode: "112")
     }
 }

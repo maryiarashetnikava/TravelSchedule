@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct StationSelectionView: View {
-    let city: String
-    let onStationSelected: (String) -> Void
+    let city: City
+    let onStationSelected: (Station) -> Void
 
     @State private var viewModel = StationSelectionViewModel()
 
@@ -35,12 +35,12 @@ struct StationSelectionView: View {
             } else {
                 ScrollView {
                     LazyVStack(spacing: 0) {
-                        ForEach(viewModel.filteredStations, id: \.self) { station in
+                        ForEach(viewModel.filteredStations) { station in
                             Button {
                                 onStationSelected(station)
                             } label: {
                                 HStack {
-                                    Text(station)
+                                    Text(station.title)
                                         .foregroundStyle(.ypBlack)
                                     
                                     Spacer()
@@ -59,11 +59,20 @@ struct StationSelectionView: View {
         .navigationTitle("Выбор станции")
         .navigationBarTitleDisplayMode(.inline)
         .background(.ypBackground)
+        .task {
+            viewModel.stations = city.stations
+        }
     }
 }
 
 #Preview {
     NavigationStack {
-        StationSelectionView(city: "Москва") { _ in }
+        StationSelectionView(
+            city: City(
+                id: "",
+                title: "Москва",
+                stations: []
+            )
+        ) { _ in }
     }
 }

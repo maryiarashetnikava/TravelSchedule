@@ -1,26 +1,20 @@
 import Observation
 import Foundation
 
+@MainActor
 @Observable
 final class StationSelectionViewModel {
     var searchText = ""
 
-    private let stations = [
-        "Киевский вокзал",
-        "Курский вокзал",
-        "Ярославский вокзал",
-        "Белорусский вокзал",
-        "Савеловский вокзал",
-        "Ленинградский вокзал"
-    ]
-
-    var filteredStations: [String] {
+    var stations: [Station] = []
+    
+    var filteredStations: [Station] {
         guard !searchText.isEmpty else {
             return stations
         }
 
         return stations.filter {
-            $0.localizedCaseInsensitiveContains(searchText)
+            $0.title.localizedCaseInsensitiveContains(searchText)
         }
     }
 }
