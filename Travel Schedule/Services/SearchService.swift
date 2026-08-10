@@ -24,8 +24,9 @@ final class SearchService: SearchServiceProtocol {
             to: to
             
         ))
-        
+
         return try response.ok.body.json
     }
+    
 }
 

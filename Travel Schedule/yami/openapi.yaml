@@ -514,12 +514,14 @@ components:
           $ref: '#/components/schemas/Station'
         departure:
           type: string
-          format: date-time
           description: Время отправления
         arrival:
           type: string
-          format: date-time
           description: Время прибытия
+        start_date:
+          type: string
+          format: date
+          description: Дата отправления
         thread:
           $ref: '#/components/schemas/Thread'
         tickets_info:
@@ -527,6 +529,9 @@ components:
         duration:
           type: integer
           description: Длительность рейса в секундах
+        has_transfers:
+          type: boolean
+          description: Признак наличия пересадок
     Pagination:
       type: object
       properties:
@@ -869,10 +874,8 @@ components:
     CarrierResponse:
       type: object
       properties:
-        carriers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Carrier'
+        carrier:
+          $ref: '#/components/schemas/Carrier'
     AllStationsResponse:
       type: object
       properties:

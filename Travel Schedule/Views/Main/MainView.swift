@@ -66,7 +66,11 @@ struct MainView: View {
                             NavigationLink {
                                 CarriersView(
                                     departure: viewModel.departure,
-                                    destination: viewModel.destination
+                                    destination: viewModel.destination,
+                                    departureCityCode: viewModel.departureCityCode,
+                                    destinationCityCode: viewModel.destinationCityCode,
+                                    departureStationCode: viewModel.departureStationCode,
+                                    destinationStationCode: viewModel.destinationStationCode
                                 )
                             } label: {
                                 Text("Найти")
@@ -86,10 +90,12 @@ struct MainView: View {
             }
         }
         .fullScreenCover(item: $selectionType) { selectionType in
-            CitySelectionView { city, station in
+            CitySelectionView { city, station, cityCode, stationCode in
                 viewModel.selectRoute(
                     city: city,
                     station: station,
+                    cityCode: cityCode,
+                    stationCode: stationCode,
                     for: selectionType
                 )
             }

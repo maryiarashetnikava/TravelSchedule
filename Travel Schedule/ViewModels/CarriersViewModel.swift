@@ -1,54 +1,14 @@
 import Observation
 
+@MainActor
 @Observable
 final class CarriersViewModel {
-    private let carriers = [
-        CarrierOption(
-            carrierName: "РЖД",
-            logoName: "rzdLogo",
-            transferInfo: "С пересадкой в Костроме",
-            date: "14 января",
-            departureTime: "22:30",
-            duration: "20 часов",
-            arrivalTime: "08:15"
-        ),
-        CarrierOption(
-            carrierName: "ФГК",
-            logoName: "fgkLogo",
-            transferInfo: nil,
-            date: "15 января",
-            departureTime: "01:15",
-            duration: "9 часов",
-            arrivalTime: "09:00"
-        ),
-        CarrierOption(
-            carrierName: "Урал логистика",
-            logoName: "uralLogo",
-            transferInfo: nil,
-            date: "16 января",
-            departureTime: "12:30",
-            duration: "9 часов",
-            arrivalTime: "21:00"
-        ),
-        CarrierOption(
-            carrierName: "РЖД",
-            logoName: "rzdLogo",
-            transferInfo: "С пересадкой в Костроме",
-            date: "17 января",
-            departureTime: "22:30",
-            duration: "20 часов",
-            arrivalTime: "08:15"
-        ),
-        CarrierOption(
-            carrierName: "РЖД",
-            logoName: "rzdLogo",
-            transferInfo: "С пересадкой в Костроме",
-            date: "17 января",
-            departureTime: "22:30",
-            duration: "20 часов",
-            arrivalTime: "08:15"
-        )
-    ]
+    
+    private let networkClient = NetworkClient.shared
+    
+    var carriers: [CarrierOption] = []
+    var errorState: ErrorState?
+    var isLoading = false
     
     var selectedTimes: Set<DepartureTimeOption> = []
     var transfersAllowed: Bool?
@@ -62,13 +22,13 @@ final class CarriersViewModel {
         guard isFilterApplied else {
             return carriers
         }
-
+        
         return carriers.filter(matchesFilters)
     }
     
     private func matchesFilters(_ carrier: CarrierOption) -> Bool {
         let matchesTime: Bool
-
+        
         if selectedTimes.isEmpty {
             matchesTime = true
         } else if let departureHour = carrier.departureHour {
@@ -78,15 +38,15 @@ final class CarriersViewModel {
         } else {
             matchesTime = false
         }
-
+        
         let matchesTransfers: Bool
-
+        
         if let transfersAllowed {
             matchesTransfers = transfersAllowed || !carrier.hasTransfer
         } else {
             matchesTransfers = true
         }
-
+        
         return matchesTime && matchesTransfers
     }
     
@@ -97,12 +57,55 @@ final class CarriersViewModel {
             selectedTimes.insert(option)
         }
     }
-
+    
     func selectTransfers(_ value: Bool) {
         transfersAllowed = value
     }
-
+    
     func applyFilters() {
         isFilterApplied = true
+    }
+    
+    
+    func loadRoutes(
+        from: String,
+        to: String,
+        departureStationCode: String,
+        destinationStationCode: String
+    ) async {
+        isLoading = true
+
+        do {
+            carriers = []
+
+            let response = try await networkClient.searchRoutes(
+                from: from,
+                to: to
+            )
+            
+            let segments = response.segments ?? []
+            
+            let filteredSegments = segments.filter {
+                $0.from?.code == departureStationCode &&
+                $0.to?.code == destinationStationCode
+            }
+            
+            
+            let sortedSegments = filteredSegments.sorted {
+                if $0.start_date != $1.start_date {
+                    return ($0.start_date ?? "") < ($1.start_date ?? "")
+                }
+
+                return ($0.departure ?? "") < ($1.departure ?? "")
+            }
+
+            carriers = sortedSegments.map(CarrierOption.init)
+
+            isLoading = false
+
+        } catch {
+            errorState = error.errorState
+            isLoading = false
+        }
     }
 }

@@ -1,31 +1,75 @@
 import Observation
 
+@MainActor
 @Observable
 final class MainViewModel {
-    var departure = ""
-    var destination = ""
-    var errorState: ErrorState? 
+    
+    var departureStation: SelectedStation?
+    var destinationStation: SelectedStation?
+    
+    var departureCityCode: String {
+        departureStation?.cityCode ?? ""
+    }
+
+    var destinationCityCode: String {
+        destinationStation?.cityCode ?? ""
+    }
+
+    var departureStationCode: String {
+        departureStation?.stationCode ?? ""
+    }
+
+    var destinationStationCode: String {
+        destinationStation?.stationCode ?? ""
+    }
+    
+    var departure: String {
+        guard let departureStation else {
+            return ""
+        }
+
+        return "\(departureStation.city) (\(departureStation.station))"
+    }
+
+    var destination: String {
+        guard let destinationStation else {
+            return ""
+        }
+
+        return "\(destinationStation.city) (\(destinationStation.station))"
+    }
+    
+    var errorState: ErrorState?
     
     var isSearchButtonVisible: Bool {
-        !departure.isEmpty && !destination.isEmpty
+        departureStation != nil && destinationStation != nil
     }
     
     func swapRoute() {
-        swap(&departure, &destination)
+        swap(&departureStation, &destinationStation)
     }
     
     func selectRoute(
         city: String,
         station: String,
+        cityCode: String,
+        stationCode: String,
         for type: RouteSelectionType
     ) {
-        let route = "\(city) (\(station))"
+        
+        let selectedStation = SelectedStation(
+            city: city,
+            cityCode: cityCode,
+            station: station,
+            stationCode: stationCode
+        )
         
         switch type {
         case .departure:
-            departure = route
+            departureStation = selectedStation
+
         case .destination:
-            destination = route
+            destinationStation = selectedStation
         }
     }
 }

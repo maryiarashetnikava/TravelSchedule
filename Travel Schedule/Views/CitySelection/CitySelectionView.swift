@@ -4,7 +4,7 @@ struct CitySelectionView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel = CitySelectionViewModel()
     
-    let onStationSelected: (String, String) -> Void
+    let onStationSelected: (String, String, String, String) -> Void
     
     var body: some View {
         NavigationStack {
@@ -24,7 +24,12 @@ struct CitySelectionView: View {
                 
                 Spacer()
                 
-                if viewModel.filteredCities.isEmpty {
+                if viewModel.isLoading {
+                    ProgressView()
+                        .tint(.ypBlack)
+                    
+                    Spacer()
+                } else if viewModel.filteredCities.isEmpty {
                     Text("Город не найден")
                         .font(.system(size: 24, weight: .bold))
                         .foregroundStyle(.ypBlack)
@@ -33,15 +38,20 @@ struct CitySelectionView: View {
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 0) {
-                            ForEach(viewModel.filteredCities, id: \.self) { city in
+                            ForEach(viewModel.filteredCities) { city in
                                 NavigationLink {
                                     StationSelectionView(city: city) { station in
-                                        onStationSelected(city, station)
+                                        onStationSelected(
+                                            city.title,
+                                            station.title,
+                                            station.cityCode,
+                                            station.id
+                                        )
                                         dismiss()
                                     }
                                 } label: {
                                     HStack {
-                                        Text(city)
+                                        Text(city.title)
                                             .foregroundStyle(.ypBlack)
                                         
                                         Spacer()
@@ -52,7 +62,8 @@ struct CitySelectionView: View {
                                     .frame(height: 60)
                                     .padding(.horizontal, 16)
                                 }
-                            }                        }
+                            }
+                        }
                     }
                 }
             }
@@ -70,10 +81,13 @@ struct CitySelectionView: View {
                 }
             }
             .background(.ypBackground)
+            .task {
+                await viewModel.loadCities()
+            }
         }
     }
 }
 
 #Preview {
-    CitySelectionView { _, _ in }
+    CitySelectionView { _, _, _, _ in }
 }

@@ -2,48 +2,37 @@ import SwiftUI
 
 struct StoriesView: View {
 
-    @State private var stories: [Story]
-    
-    @State private var isStoryPresented = false
-    @State private var displayedStoryIndex = 0
+    @State private var viewModel: StoriesViewModel
     
     init(stories: [Story]) {
-        _stories = State(initialValue: stories)
+        _viewModel = State(
+            initialValue: StoriesViewModel(stories: stories)
+        )
     }
-
+    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 12) {
-                ForEach(Array(stories.enumerated()), id: \.element.id) { index, story in
+                ForEach(Array(viewModel.stories.enumerated()), id: \.element.id) { index, story in
                     StoryPreviewCell(story: story)
                         .onTapGesture {
-                            displayedStoryIndex = index
-                            isStoryPresented = true
+                            viewModel.showStory(at: index)
                         }
                 }
             }
             .padding(.horizontal, 16)
         }
-        .fullScreenCover(isPresented: $isStoryPresented) {
+        .fullScreenCover(isPresented: $viewModel.isStoryPresented) {
             StoryView(
-                story: stories[displayedStoryIndex],
+                story: viewModel.currentStory,
                 onFinished: {
-                        stories[displayedStoryIndex].isViewed = true
-                    
-                    if displayedStoryIndex < stories.count - 1 {
-                        displayedStoryIndex += 1
-                    } else {
-                        isStoryPresented = false
-                    }
+                    viewModel.finishStory()
                 },
-                
                 onPreviousStory: {
-                    if displayedStoryIndex > 0 {
-                        displayedStoryIndex -= 1
-                    }
+                    viewModel.previousStory()
                 }
             )
-            .id(displayedStoryIndex)
+            .id(viewModel.displayedStoryIndex)
         }
         .frame(height: 196)
     }

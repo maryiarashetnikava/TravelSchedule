@@ -1,23 +1,22 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage("isDarkTheme") private var isDarkTheme = false
-    
-    @State private var isUserAgreementPresented = false
+
+    @State private var viewModel = SettingsViewModel()
 
     var body: some View {
         VStack(spacing: 0) {
 
-            Toggle(isOn: $isDarkTheme) {
+            Toggle(isOn: $viewModel.isDarkTheme) {
                 Text("Темная тема")
-                    .font(.system(size: 17, weight: .regular))
+                    .font(.system(size: 17))
                     .foregroundStyle(.ypBlack)
             }
             .tint(.ypBlue)
             .padding(.vertical, 19)
 
             Button {
-                isUserAgreementPresented = true
+                viewModel.showUserAgreement()
             } label: {
                 HStack {
                     Text("Пользовательское соглашение")
@@ -36,12 +35,12 @@ struct SettingsView: View {
             Spacer()
 
             VStack(spacing: 16) {
-                Text("Приложение использует API «Яндекс.Расписания»")
+                Text(viewModel.apiInfo)
                     .font(.system(size: 12, weight: .regular))
                     .foregroundStyle(.ypBlack)
                     .multilineTextAlignment(.center)
 
-                Text("Версия 1.0 (beta)")
+                Text(viewModel.appVersion)
                     .font(.system(size: 12, weight: .regular))
                     .foregroundStyle(.ypBlack)
             }
@@ -51,7 +50,9 @@ struct SettingsView: View {
         .padding(.horizontal, 16)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.ypBackground)
-        .fullScreenCover(isPresented: $isUserAgreementPresented) {
+        .fullScreenCover(
+            isPresented: $viewModel.isUserAgreementPresented
+        ) {
             NavigationStack {
                 UserAgreementView()
             }

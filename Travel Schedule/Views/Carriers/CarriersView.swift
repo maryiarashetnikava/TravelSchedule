@@ -5,9 +5,15 @@ struct CarriersView: View {
     
     let departure: String
     let destination: String
-
+    
+    let departureCityCode: String
+    let destinationCityCode: String
+    
+    let departureStationCode: String
+    let destinationStationCode: String
+    
     @State private var viewModel = CarriersViewModel()
-
+    
     var body: some View {
         VStack(spacing: 0) {
             Text("\(departure) → \(destination)")
@@ -17,68 +23,88 @@ struct CarriersView: View {
                 .padding(.horizontal, 16)
                 .padding(.top, 24)
                 .padding(.bottom, 24)
-
-            if viewModel.filteredCarriers.isEmpty {
+            
+            if viewModel.isLoading {
                 Spacer()
-
+                
+                ProgressView()
+                    .tint(.ypBlack)
+                
+                Spacer()
+            } else if viewModel.filteredCarriers.isEmpty {
+                Spacer()
+                
                 Text("Вариантов нет")
                     .font(.system(size: 24, weight: .bold))
                     .foregroundStyle(.ypBlack)
-
+                
                 Spacer()
             } else {
                 ScrollView {
                     LazyVStack(spacing: 8) {
                         ForEach(viewModel.filteredCarriers) { carrier in
                             NavigationLink {
-                                CarrierInfoView()
+                                CarrierInfoView(
+                                    carrierCode: carrier.code
+                                )
                             } label: {
                                 VStack(spacing: 0) {
                                     HStack(alignment: .center, spacing: 12) {
-                                        Image(carrier.logoName)
-                                            .resizable()
-                                            .scaledToFit()
+                                        if let logoURL = carrier.logoURL,
+                                           let url = URL(string: logoURL) {
+                                            
+                                            AsyncImage(url: url) { image in
+                                                image
+                                                    .resizable()
+                                                    .scaledToFit()
+                                            } placeholder: {
+                                                ProgressView()
+                                            }
                                             .frame(width: 44, height: 44)
-
+                                        } else {
+                                            Color.clear
+                                                .frame(width: 44, height: 44)
+                                        }
+                                        
                                         VStack(alignment: .leading, spacing: 2) {
                                             Text(carrier.carrierName)
                                                 .font(.system(size: 20))
                                                 .foregroundStyle(.ypBlackUniversal)
-
+                                            
                                             if let transferInfo = carrier.transferInfo {
                                                 Text(transferInfo)
                                                     .font(.system(size: 14))
                                                     .foregroundStyle(.ypRed)
                                             }
                                         }
-
+                                        
                                         Spacer()
-
+                                        
                                         Text(carrier.date)
                                             .font(.system(size: 14))
                                             .foregroundStyle(.ypBlackUniversal)
                                     }
-
+                                    
                                     Spacer()
-
+                                    
                                     HStack(spacing: 8) {
                                         Text(carrier.departureTime)
                                             .font(.system(size: 20))
                                             .foregroundStyle(.ypBlackUniversal)
-
+                                        
                                         Rectangle()
                                             .fill(.ypGray)
                                             .frame(height: 1)
-
+                                        
                                         Text(carrier.duration)
                                             .font(.system(size: 14))
                                             .foregroundStyle(.ypBlackUniversal)
                                             .fixedSize()
-
+                                        
                                         Rectangle()
                                             .fill(.ypGray)
                                             .frame(height: 1)
-
+                                        
                                         Text(carrier.arrivalTime)
                                             .font(.system(size: 20))
                                             .foregroundStyle(.ypBlackUniversal)
@@ -105,7 +131,7 @@ struct CarriersView: View {
                 HStack(spacing: 4) {
                     Text("Уточнить время")
                         .font(.system(size: 17, weight: .bold))
-
+                    
                     if viewModel.isFilterApplied {
                         Circle()
                             .fill(.ypRed)
@@ -135,6 +161,14 @@ struct CarriersView: View {
         }
         .toolbar(.hidden, for: .tabBar)
         .background(.ypBackground)
+        .task {
+            await viewModel.loadRoutes(
+                from: departureCityCode,
+                to: destinationCityCode,
+                departureStationCode: departureStationCode,
+                destinationStationCode: destinationStationCode
+            )
+        }
     }
 }
 
@@ -142,7 +176,11 @@ struct CarriersView: View {
     NavigationStack {
         CarriersView(
             departure: "Москва (Ярославский вокзал)",
-            destination: "Санкт Петербург (Балтийский вокзал)"
+            destination: "Санкт-Петербург (Балтийский вокзал)",
+            departureCityCode: "c213",
+            destinationCityCode: "c2",
+            departureStationCode: "s2000001",
+            destinationStationCode: "s2004004"
         )
     }
 }
